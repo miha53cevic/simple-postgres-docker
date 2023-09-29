@@ -1,0 +1,24 @@
+# https://github.com/docker-library/docs/blob/master/postgres/README.md#postgresversion-alpine
+
+services:
+  db:
+    image: postgres:16-alpine
+    restart: always
+    user: postgres
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_PASSWORD=password123
+    expose:
+      - 5432 # exposed only to services
+    ports:
+      - 5432:5432 # exposed to host
+
+  adminer:
+      image: adminer # phpAdmin
+      restart: always
+      ports:
+        - 8080:8080
+volumes:
+  db-data:
